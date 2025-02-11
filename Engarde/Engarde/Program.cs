@@ -1,3 +1,3 @@
 ﻿
-using var game = new Engarde.Game1();
+using var game = new Engarde.BattleGame();
 game.Run();

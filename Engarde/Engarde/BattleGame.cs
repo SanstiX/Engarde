@@ -100,8 +100,8 @@ namespace Engarde
 
             _spriteBatch.Begin();
             _spriteBatch.DrawString(_font, gameMessage, new Vector2(50, 50), Color.White);
-            _spriteBatch.DrawString(_font, $"{player1.Name}: {player1.HP} HP", new Vector2(50, 100), Color.White);
-            _spriteBatch.DrawString(_font, $"{player2.Name}: {player2.HP} HP", new Vector2(50, 130), Color.White);
+            _spriteBatch.DrawString(_font, $"{player1.Name}: {player1.HP} HP - {player1.Armor} ARM", new Vector2(50, 100), Color.White);
+            _spriteBatch.DrawString(_font, $"{player2.Name}: {player2.HP} HP - {player2.Armor} ARM", new Vector2(50, 130), Color.White);
             _spriteBatch.DrawString(_font, "Press 1 to Attack, 2 to Defend, 3 to Buff", new Vector2(50, 180), Color.White);
             _spriteBatch.End();
 

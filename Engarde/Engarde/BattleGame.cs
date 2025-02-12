@@ -144,7 +144,7 @@ namespace Engarde
             {
                 if ((opponent.Armor - damage) <= 0)
                 {
-                    opponent.HP = Math.Max(0, HP - (damage - opponent.Armor));
+                    opponent.HP = Math.Max(0, opponent.HP - (damage - opponent.Armor));
                     opponent.Armor = 0;
                     opponent.armorJustBroken = true;
                 }

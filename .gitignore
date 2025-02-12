@@ -159,5 +159,7 @@ monodroid*.msi
 *.dll
 *.VC.db
 *.VC.opendb
+*.suo
 
 artifacts/
+/Engarde/.vs/Engarde/v17/.suo

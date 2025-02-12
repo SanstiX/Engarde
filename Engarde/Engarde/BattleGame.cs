@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SharpDX.MediaFoundation;
 
 namespace Engarde
 {
@@ -53,7 +54,13 @@ namespace Engarde
             if (IsKeyPressed(Keys.D1))
             {
                 activePlayer.Attack(opponent);
-                gameMessage = $"{activePlayer.Name} attacked {opponent.Name}!";
+                if (opponent.Armor <= 0 && opponent.armorJustBroken)
+                {
+                    gameMessage = $"{activePlayer.Name} attacked {opponent.Name}! {opponent.Name}'s armor broke!";
+                    opponent.armorJustBroken = false;
+                }
+                else
+                    gameMessage = $"{activePlayer.Name} attacked {opponent.Name}!";
                 EndTurn();
             }
             else if (IsKeyPressed(Keys.D2))
@@ -116,6 +123,7 @@ namespace Engarde
         public int Armor { get; private set; } = 0;
         private bool defending;
         private bool hasJustBuffed = false;
+        public bool armorJustBroken = false;
 
         public bool IsDefeated => HP <= 0;
 
@@ -132,7 +140,19 @@ namespace Engarde
                 damage /= 2;
                 opponent.defending = false;
             }
-            opponent.HP = Math.Max(0, opponent.HP - damage);
+            if (opponent.Armor > 0)
+            {
+                if ((opponent.Armor - damage) <= 0)
+                {
+                    opponent.HP = Math.Max(0, HP - (damage - opponent.Armor));
+                    opponent.Armor = 0;
+                    opponent.armorJustBroken = true;
+                }
+                else
+                    opponent.Armor -= damage;
+            }
+            else
+                opponent.HP = Math.Max(0, opponent.HP - damage);
             hasJustBuffed = false;
         }
 

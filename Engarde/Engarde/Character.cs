@@ -17,9 +17,10 @@ namespace Engarde
 
         public bool IsDefeated => HP <= 0;
 
-        public Character(string name)
+        public Character(string name, int hp)
         {
             Name = name;
+            HP = hp;
         }
 
         public void Attack(Character opponent)

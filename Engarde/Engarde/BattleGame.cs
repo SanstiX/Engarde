@@ -31,7 +31,7 @@ namespace Engarde
         protected override void Initialize()
         {
             base.Initialize();
-            player1 = new Character("Player 1");
+            player1 = new Tank("Tanky");
             player2 = new Character("Player 2");
             activePlayer = player1;
             opponent = player2;

@@ -60,7 +60,12 @@ namespace Engarde
                     if (opponent.countered)
                     {
                         gameMessage = $"{activePlayer.Name} attacked {opponent.Name}! {opponent.Name}'s armor broke! But {opponent.Name} is defending, and countered!";
-                        opponent.countered = false ;
+                        opponent.countered = false;
+                    }
+                    if (activePlayer.gotCrit)
+                    {
+                        gameMessage = $"{activePlayer.Name} attacked {opponent.Name}! It was a critical hit! {opponent.Name}'s armor broke!";
+                        activePlayer.gotCrit = false;
                     }
                     opponent.armorJustBroken = false;
                 }
@@ -71,6 +76,11 @@ namespace Engarde
                     {
                         gameMessage = $"{activePlayer.Name} attacked {opponent.Name}! But {opponent.Name} is defending, and countered! {activePlayer.Name} lost HP instead!";
                         opponent.countered = false;
+                    }
+                    if (activePlayer.gotCrit)
+                    {
+                        gameMessage = $"{activePlayer.Name} attacked {opponent.Name}! It was a critical hit!";
+                        activePlayer.gotCrit = false;
                     }
                 }
                 EndTurn();

@@ -18,6 +18,7 @@ namespace Engarde
         public bool countered;
         private bool hasJustBuffed = false;
         public bool armorJustBroken = false; //geen comments?
+        public bool gotCrit;
 
         public bool IsDefeated => HP <= 0;
 
@@ -31,11 +32,16 @@ namespace Engarde
         public void Attack(Character opponent)
         {
             int damage = 10;
+            Random rnd = new Random();
+            if (rnd.Next(0, 10) == 0)
+            {
+                damage *= 2;
+                gotCrit = true;
+            }
             if (opponent.defending)
             {
-                Random rnd = new Random();
                 int counternum = rnd.Next(0, 5);
-                if (counternum == 0)
+                if (counternum == 0 && !gotCrit)
                     opponent.countered = true;
                 opponent.defending = false;
             }

@@ -32,7 +32,7 @@ namespace Engarde
         {
             base.Initialize();
             player1 = new Tank("Tanky");
-            player2 = new Character("Player 2");
+            player2 = new Character("Player 2", 100, 0);
             activePlayer = player1;
             opponent = player2;
             gameOver = false;
@@ -57,10 +57,22 @@ namespace Engarde
                 if (opponent.Armor <= 0 && opponent.armorJustBroken)
                 {
                     gameMessage = $"{activePlayer.Name} attacked {opponent.Name}! {opponent.Name}'s armor broke!";
+                    if (opponent.countered)
+                    {
+                        gameMessage = $"{activePlayer.Name} attacked {opponent.Name}! {opponent.Name}'s armor broke! But {opponent.Name} is defending, and countered!";
+                        opponent.countered = false ;
+                    }
                     opponent.armorJustBroken = false;
                 }
                 else
+                {
                     gameMessage = $"{activePlayer.Name} attacked {opponent.Name}!";
+                    if (opponent.countered)
+                    {
+                        gameMessage = $"{activePlayer.Name} attacked {opponent.Name}! But {opponent.Name} is defending, and countered! {activePlayer.Name} lost HP instead!";
+                        opponent.countered = false;
+                    }
+                }
                 EndTurn();
             }
             else if (IsKeyPressed(Keys.D2))
@@ -73,7 +85,12 @@ namespace Engarde
             {
                 if (activePlayer.TryBuff())
                 {
-                    gameMessage = $"{activePlayer.Name} used a buff!";
+                    if (activePlayer.buffEffect == "heal")
+                        gameMessage = $"{activePlayer.Name} used a buff! Healed for 15 HP!";
+                    else if (activePlayer.buffEffect == "armor")
+                        gameMessage = $"{activePlayer.Name} used a buff! Gained 15 armor!";
+                    else if (activePlayer.buffEffect == "nothing")
+                        gameMessage = $"{activePlayer.Name} used a buff! ...but nothing happened!";
                     EndTurn();
                 }
                 else

@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Engarde
 {
-    internal class Mage
+    public class Mage : Character
     {
+        public Mage(string Name) : base(Name, 75, 0)
+        {
+
+        }
     }
 }

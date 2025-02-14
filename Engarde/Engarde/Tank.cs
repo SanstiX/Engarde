@@ -8,10 +8,9 @@ namespace Engarde
 {
     public class Tank : Character
     {
-        public Tank(string Name) : base(Name, hp) 
+        public Tank(string Name) : base(Name, 150, 50) 
         {
             Name = this.Name;
-            hp = 200;
         }
     }
 }

@@ -32,7 +32,7 @@ namespace Engarde
         {
             base.Initialize();
             player1 = new Tank("Tanky");
-            player2 = new Character("Player 2", 100, 0);
+            player2 = new Tank("Tankyer");
             activePlayer = player1;
             opponent = player2;
             gameOver = false;

@@ -11,6 +11,9 @@ namespace Engarde
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private SpriteFont _font;
+        private Texture2D _brawler;
+        private Texture2D _tank;
+        private Texture2D _mage;
 
         private Character player1;
         private Character player2;
@@ -42,6 +45,9 @@ namespace Engarde
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _font = Content.Load<SpriteFont>("GameFont");
+            _brawler = Content.Load<Texture2D>("brawler");
+            _tank = Content.Load<Texture2D>("tank");
+            _mage = Content.Load<Texture2D>("mage");
         }
 
         protected override void Update(GameTime gameTime)
@@ -133,10 +139,12 @@ namespace Engarde
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
-            _spriteBatch.DrawString(_font, gameMessage, new Vector2(50, 50), Color.White);
-            _spriteBatch.DrawString(_font, $"{player1.Name}: {player1.HP} HP - {player1.Armor} ARM", new Vector2(50, 100), Color.White);
-            _spriteBatch.DrawString(_font, $"{player2.Name}: {player2.HP} HP - {player2.Armor} ARM", new Vector2(50, 130), Color.White);
-            _spriteBatch.DrawString(_font, "Press 1 to Attack, 2 to Defend, 3 to Buff", new Vector2(50, 180), Color.White);
+            _spriteBatch.DrawString(_font, gameMessage, new Vector2(295, 50), Color.White);
+            _spriteBatch.DrawString(_font, $"{player1.Name}: {player1.HP} HP - {player1.Armor} ARM", new Vector2(75, 130), Color.White);
+            _spriteBatch.DrawString(_font, $"{player2.Name}: {player2.HP} HP - {player2.Armor} ARM", new Vector2(550, 130), Color.White);
+            _spriteBatch.DrawString(_font, "Press 1 to Attack, 2 to Defend, 3 to Buff", new Vector2(265, 400), Color.White);
+            _spriteBatch.Draw(_tank, new Rectangle(85, 180, 150, 150), null, Color.White);
+            _spriteBatch.Draw(_tank, new Rectangle(570, 180, 150, 150), null, Color.White);
             _spriteBatch.End();
 
             base.Draw(gameTime);
